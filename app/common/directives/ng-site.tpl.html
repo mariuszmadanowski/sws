@@ -1,0 +1,24 @@
+<li data-ng-click="site.showSub = !site.showSub" data-ng-class="{'expand': site.subsites.length}">
+    <img src="assets/img/{{ site.icon }}" alt="{{ site.name }}" width="50px" height="50px">
+    <strong>{{ site.name }}</strong>
+    <div data-ng-if="site.subsites.length">
+        <div class="on" data-ng-if="site.isSiteOn()">on</div>
+        <div class="on2" data-ng-if="site.isSitePartiallyOn()">on</div>
+        <div data-ng-if="site.isSitePartiallyOn()">
+            {{ (site.subsites | filter: {avaible: true}).length }}/{{ site.subsites.length }} online
+        </div>
+        <div class="off" data-ng-if="site.isSiteOff()">off</div>
+        <ul data-ng-show="site.showSub">
+            <li data-ng-repeat="site in site.subsites" data-ng-sub-site data-ng-model="site">
+            </li>
+        </ul>
+    </div>
+    <div data-ng-if="!site.subsites.length">
+        <div class="on" data-ng-if="site.avaible">on</div>
+        <div class="off" data-ng-if="!site.avaible">off</div>
+        <div data-ng-if="!site.avaible">
+            At this point is offline
+            <br> Last time avaible: {{ site.lastTimeAvaible | date:'dd.MM.yyyy HH:mm:ss' }}
+        </div>
+    </div>
+</li>
