@@ -5,15 +5,6 @@ sws.factory('sites', ['$filter', function($filter) {
         url: 'http://www.google.pl/images/branding/product/ico/googleg_lodp.ico',
         icon: 'google.jpg',
         showSub: false,
-        isSiteOff: function() {
-            return isSiteOff(this);
-        },
-        isSiteOn: function() {
-            return isSiteOn(this);
-        },
-        isSitePartiallyOn: function() {
-            return isSitePartiallyOn(this);
-        },
         subsites: [{
             name: 'Gmail',
             url: 'http://ssl.gstatic.com/ui/v1/icons/mail/images/favicon5.ico',
@@ -52,15 +43,6 @@ sws.factory('sites', ['$filter', function($filter) {
         url: 'http://www.google.pl/images/branding/product/ico/googleg_lodp.ico',
         icon: 'google.jpg',
         showSub: false,
-        isSiteOff: function() {
-            return isSiteOff(this);
-        },
-        isSiteOn: function() {
-            return isSiteOn(this);
-        },
-        isSitePartiallyOn: function() {
-            return isSitePartiallyOn(this);
-        },
         subsites: [{
             name: 'Gmail 2',
             url: 'http://ssl.gstatic.com/ui/v1/icons/mail/images/favicon5.ico',
@@ -82,22 +64,6 @@ sws.factory('sites', ['$filter', function($filter) {
         }]
     }];
 
-    function isSiteOff(site) {
-        //(site.subsites | filter: {avaible: true}).length === 0
-        return getSitesAvaibleCount(site) === 0;
-    }
-
-    function isSiteOn(site) {
-        //(site.subsites | filter: {avaible: true}).length === site.subsites.length
-        return getSitesAvaibleCount(site) === site.subsites.length;
-    }
-
-    function isSitePartiallyOn(site) {
-        //(site.subsites | filter: {avaible: true}).length !== site.subsites.length && (site.subsites | filter: {avaible: true}).length > 0
-        var sitesAvaibleCount = getSitesAvaibleCount(site);
-        return sitesAvaibleCount !== site.subsites.length && sitesAvaibleCount > 0;
-    }
-
     function getSitesAvaibleCount(site) {
         return $filter('filter')(site.subsites, {
             avaible: true
@@ -109,7 +75,58 @@ sws.factory('sites', ['$filter', function($filter) {
             return sites;
         },
         getOffline: function() {
-            return sites;
+            var result = [];
+            angular.forEach(sites, function(s) {
+                if (!s.avaible) {
+                    result.push(s);
+                }
+                angular.forEach(s.subsites, function(ss) {
+                    if (!ss.avaible) {
+                        result.push(ss);
+                    }
+                });
+            });
+            return result;
+        },
+        isSiteOff: function(site) {
+            if (typeof site === 'undefined') {
+                throw new Error('Undefined argument "site".');
+            }
+            var result = false;
+            angular.forEach(sites, function(s) {
+                if (s === site) {
+                    result = (getSitesAvaibleCount(s) === 0);
+                }
+            });
+            //(site.subsites | filter: {avaible: true}).length === 0
+            return result;
+        },
+        isSiteOn: function(site) {
+            if (typeof site === 'undefined') {
+                throw new Error('Undefined argument "site".');
+            }
+            var result = false;
+            angular.forEach(sites, function(s) {
+                if (s === site) {
+                    result = (getSitesAvaibleCount(s) === s.subsites.length);
+                }
+            });
+            //(site.subsites | filter: {avaible: true}).length === site.subsites.length
+            return result;
+        },
+        isSitePartiallyOn: function(site) {
+            if (typeof site === 'undefined') {
+                throw new Error('Undefined argument "site".');
+            }
+            var result = false;
+            angular.forEach(sites, function(s) {
+                if (s === site) {
+                    var count = getSitesAvaibleCount(s);
+                    result = (count !== s.subsites.length && count > 0);
+                }
+            });
+            //(site.subsites | filter: {avaible: true}).length !== site.subsites.length && (site.subsites | filter: {avaible: true}).length > 0
+            return result;
         }
     };
 }]);

@@ -2,12 +2,12 @@
     <img src="assets/img/{{ site.icon }}" alt="{{ site.name }}" width="50px" height="50px">
     <strong>{{ site.name }}</strong>
     <div data-ng-if="site.subsites.length">
-        <div class="on" data-ng-if="site.isSiteOn()">on</div>
-        <div class="on2" data-ng-if="site.isSitePartiallyOn()">on</div>
-        <div data-ng-if="site.isSitePartiallyOn()">
+        <div class="on" data-ng-if="sites.isSiteOn(site)">on</div>
+        <div class="on2" data-ng-if="sites.isSitePartiallyOn(site)">on</div>
+        <div data-ng-if="sites.isSitePartiallyOn(site)">
             {{ (site.subsites | filter: {avaible: true}).length }}/{{ site.subsites.length }} online
         </div>
-        <div class="off" data-ng-if="site.isSiteOff()">off</div>
+        <div class="off" data-ng-if="sites.isSiteOff(site)">off</div>
         <ul data-ng-show="site.showSub">
             <li data-ng-repeat="site in site.subsites" data-ng-sub-site data-ng-model="site">
             </li>
