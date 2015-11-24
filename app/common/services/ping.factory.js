@@ -1,7 +1,14 @@
 'use strict';
-sws.factory('ping', ['$window', '$timeout', function($window, $timeout) {
+
+sws.factory('ping', ['$timeout', function($timeout) {
     return {
         test: function(url, callback) {
+            if (typeof url === 'undefined' || typeof callback === 'undefined') {
+                throw new Error('Undefined argument "url" or "callback".');
+            }
+            if (typeof callback !== 'function') {
+                throw new Error('Argument "callback" must be a function.');
+            }
             if (!this.inUse) {
                 this.inUse = true;
                 this.callback = callback;

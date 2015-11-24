@@ -1,4 +1,5 @@
 'use strict';
+
 sws.factory('sites', ['$filter', function($filter) {
     var sites = [{
         name: 'Google',
@@ -92,12 +93,7 @@ sws.factory('sites', ['$filter', function($filter) {
             if (typeof site === 'undefined') {
                 throw new Error('Undefined argument "site".');
             }
-            var result = false;
-            angular.forEach(sites, function(s) {
-                if (s === site) {
-                    result = (getSitesAvaibleCount(s) === 0);
-                }
-            });
+            var result = (getSitesAvaibleCount(site) === 0);
             //(site.subsites | filter: {avaible: true}).length === 0
             return result;
         },
@@ -105,12 +101,7 @@ sws.factory('sites', ['$filter', function($filter) {
             if (typeof site === 'undefined') {
                 throw new Error('Undefined argument "site".');
             }
-            var result = false;
-            angular.forEach(sites, function(s) {
-                if (s === site) {
-                    result = (getSitesAvaibleCount(s) === s.subsites.length);
-                }
-            });
+            var result = (getSitesAvaibleCount(site) === site.subsites.length);
             //(site.subsites | filter: {avaible: true}).length === site.subsites.length
             return result;
         },
@@ -118,13 +109,8 @@ sws.factory('sites', ['$filter', function($filter) {
             if (typeof site === 'undefined') {
                 throw new Error('Undefined argument "site".');
             }
-            var result = false;
-            angular.forEach(sites, function(s) {
-                if (s === site) {
-                    var count = getSitesAvaibleCount(s);
-                    result = (count !== s.subsites.length && count > 0);
-                }
-            });
+            var count = getSitesAvaibleCount(site);
+            var result = (count !== site.subsites.length && count > 0);
             //(site.subsites | filter: {avaible: true}).length !== site.subsites.length && (site.subsites | filter: {avaible: true}).length > 0
             return result;
         }

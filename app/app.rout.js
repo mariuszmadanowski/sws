@@ -1,4 +1,5 @@
 'use strict';
+
 sws.config(function ($routeProvider) {
     $routeProvider
         .when('/', {

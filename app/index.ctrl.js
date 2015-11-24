@@ -1,4 +1,5 @@
 'use strict';
+
 sws.controller('indexCtrl', ['$scope', '$location', 'appName', function ($scope, $location, appName) {
     $scope.appName = appName;
 

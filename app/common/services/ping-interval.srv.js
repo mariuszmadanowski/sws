@@ -1,8 +1,13 @@
 'use strict';
+
 sws.service('pingInterval', ['$interval', 'ping', function($interval, ping) {
     var stopInterval;
 
     this.init = function(site) {
+        if (typeof site === 'undefined') {
+            throw new Error('Undefined argument "site".');
+        }
+
         function updateAvaible() {
             new ping.test(site.url, function(status) {
                 site.avaible = status;

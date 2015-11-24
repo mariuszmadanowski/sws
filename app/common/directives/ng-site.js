@@ -1,8 +1,9 @@
 'use strict';
+
 sws.directive('ngSite', ['pingInterval', function(pingInterval) {
     return {
         restrict: 'A',
-        require: '^ngModel',
+        require: 'ngModel',
         replace: true,
         transclude: false,
         templateUrl: 'app/common/directives/ng-site.tpl.html',
