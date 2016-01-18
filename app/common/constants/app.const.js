@@ -1,3 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
-sws.constant('appName', 'Stone Wall System');
+    namespaceSws.sws.constant('appName', 'Stone Wall System');
+})();

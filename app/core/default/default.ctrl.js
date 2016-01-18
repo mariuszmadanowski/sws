@@ -1,5 +1,7 @@
-'use strict';
+(function() {
+    'use strict';
 
-sws.controller('defaultCtrl', ['$scope', '$interval', 'sites', function ($scope, $interval, sites) {
-    $scope.sites = sites;
-}]);
+    namespaceSws.sws.controller('defaultCtrl', ['$scope', '$interval', 'sites', function($scope, $interval, sites) {
+        $scope.sites = sites;
+    }]);
+})();

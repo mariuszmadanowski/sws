@@ -1,3 +1,7 @@
-'use strict';
+var namespaceSws = {};
 
-var sws = angular.module('sws', ['ngRoute', 'ngAnimate']);
+(function() {
+    'use strict';
+
+    namespaceSws.sws = angular.module('sws', ['ngRoute', 'ngAnimate']);
+})();
