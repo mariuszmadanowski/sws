@@ -1,10 +1,12 @@
-<li>
-    <img src="assets/img/{{ site.icon }}" alt="{{ site.name }}" width="50px" height="50px">
-    <strong>{{ site.name }}</strong>
-    <div class="on" data-ng-if="site.avaible">on</div>
-    <div class="off" data-ng-if="!site.avaible">off</div>
-    <div data-ng-if="!site.avaible">
-        At this point is offline
-        <br> Last time avaible: {{ site.lastTimeAvaible | date:'dd.MM.yyyy HH:mm:ss' }}
+<li class="subsite">
+    <img ng-src="assets/img/{{ site.icon }}" alt="{{ site.name }}" width="40px" height="40px">
+    <strong>{{ site.name }} <span data-ng-if="site.url">({{ site.url }})</span></strong>
+    <div class="right">
+        <div class="on" data-ng-if="site.avaible">on</div>
+        <div class="off" data-ng-if="!site.avaible">off</div>
+        <div class="info" data-ng-if="!site.avaible">
+            At this point is offline
+            <br> Last time avaible: {{ site.lastTimeAvaible | date:'dd.MM.yyyy HH:mm:ss' }}
+        </div>
     </div>
 </li>

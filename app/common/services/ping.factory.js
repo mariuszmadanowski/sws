@@ -12,7 +12,7 @@
                 if (typeof callback !== 'function') {
                     throw new Error('Argument "callback" must be a function.');
                 }
-                
+
                 if (!this.inUse) {
                     this.inUse = true;
                     this.callback = callback;

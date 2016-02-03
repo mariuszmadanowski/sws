@@ -1,24 +1,26 @@
-<li data-ng-click="site.showSub = !site.showSub" data-ng-class="{'expand': site.subsites.length}">
-    <img src="assets/img/{{ site.icon }}" alt="{{ site.name }}" width="50px" height="50px">
-    <strong>{{ site.name }}</strong>
-    <div data-ng-if="site.subsites.length">
-        <div class="on" data-ng-if="sites.isSiteOn(site)">on</div>
-        <div class="on2" data-ng-if="sites.isSitePartiallyOn(site)">on</div>
-        <div data-ng-if="sites.isSitePartiallyOn(site)">
-            {{ (site.subsites | filter: {avaible: true}).length }}/{{ site.subsites.length }} online
+<li data-ng-click="site.showSub = !site.showSub" data-ng-class="{'expand': site.subsites.length, 'expanded': site.showSub}">
+    <div class="site">
+        <img ng-src="assets/img/{{ site.icon }}" alt="{{ site.name }}" width="40px" height="40px">
+        <strong>{{ site.name }} <span data-ng-if="site.url">({{ site.url }})</span></strong>
+        <div class="right" data-ng-if="!site.subsites.length">
+            <div class="on" data-ng-if="site.avaible">on</div>
+            <div class="off" data-ng-if="!site.avaible">off</div>
+            <div class="info" data-ng-if="!site.avaible">
+                At this point is offline
+                <br> Last time avaible: {{ site.lastTimeAvaible | date:'dd.MM.yyyy HH:mm:ss' }}
+            </div>
         </div>
-        <div class="off" data-ng-if="sites.isSiteOff(site)">off</div>
-        <ul data-ng-show="site.showSub">
-            <li data-ng-repeat="site in site.subsites" data-ng-sub-site data-ng-model="site">
-            </li>
-        </ul>
-    </div>
-    <div data-ng-if="!site.subsites.length">
-        <div class="on" data-ng-if="site.avaible">on</div>
-        <div class="off" data-ng-if="!site.avaible">off</div>
-        <div data-ng-if="!site.avaible">
-            At this point is offline
-            <br> Last time avaible: {{ site.lastTimeAvaible | date:'dd.MM.yyyy HH:mm:ss' }}
+        <div class="right" data-ng-if="site.subsites.length">
+            <div class="on" data-ng-if="sites.isSiteOn(site)">on</div>
+            <div class="on2" data-ng-if="sites.isSitePartiallyOn(site)">on</div>
+            <div class="info" data-ng-if="sites.isSitePartiallyOn(site)">
+                {{ (site.subsites | filter: {avaible: true}).length }}/{{ site.subsites.length }} online
+            </div>
+            <div class="off" data-ng-if="sites.isSiteOff(site)">off</div>
         </div>
     </div>
+    <ul data-ng-if="site.subsites.length" data-ng-show="site.showSub">
+        <li data-ng-repeat="site in site.subsites" data-ng-sub-site data-ng-model="site">
+        </li>
+    </ul>
 </li>

@@ -10,7 +10,7 @@
             }
 
             function updateAvaible() {
-                new ping.test(site.url, function(status) {
+                new ping.test(site.pingingUrl, function(status) {
                     site.avaible = status;
                     if (site.avaible) {
                         site.lastTimeAvaible = new Date();

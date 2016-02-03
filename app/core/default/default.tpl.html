@@ -1,10 +1,10 @@
 <div data-ng-controller="defaultCtrl">
     <h3>Offline</h3>
-    <ul>
+    <ul class="sitesOffline">
         <li data-ng-repeat="site in sites.getOffline()" data-ng-sub-site data-ng-model="site"></li>
     </ul>
     <h3>All</h3>
-    <ul>
+    <ul class="sitesAll">
         <li data-ng-repeat="site in sites.getAll()" data-ng-site data-ng-model="site">
         </li>
     </ul>
