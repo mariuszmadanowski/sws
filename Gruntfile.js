@@ -41,9 +41,10 @@ module.exports = function(grunt) {
                 ],
                 options: {
                     specs: [
-                        'spec/*[sS]pec.js',
-                        'spec/**/*[sS]pec.js',
-                        'spec/**/**/*[sS]pec.js'
+                        //'spec/*[sS]pec.js',
+                        //'spec/**/*[sS]pec.js',
+                        //'spec/**/**/*[sS]pec.js'
+                        'spec/common/services/sites.factory.spec.js'
                     ],
                     vendor: [
                         'node_modules/angular/angular.js',

@@ -1,4 +1,4 @@
-var namespaceSws = {};
+var namespaceSws = window.namespaceSws || {}; // create namespace for our app
 
 (function() {
     'use strict';
